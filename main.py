@@ -13,7 +13,7 @@ app = FastAPI()
 # CORS to allow frontend requests (change "*" to your frontend URL in prod)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],
+    allow_origins=["http://localhost:8080", "https://yc-sus-roster.vercel.app/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -21,7 +21,7 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Search API is running"}
 
 @app.post("/fetch_top_k_profiles")
 async def perform_fetch_top_k_profiles(request: Request):
