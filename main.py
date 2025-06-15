@@ -26,6 +26,11 @@ app.add_middleware(
 async def root():
     return {"message": "Search API is running"}
 
+@app.get("/fetch_top_k_profiles")
+async def get_top_k_profiles(query: str):
+    results = fetch_top_k_profiles(query, 3)
+    return {"results": results}
+
 @app.post("/fetch_top_k_profiles")
 async def perform_fetch_top_k_profiles(request: Request):
     print("Starting perform_fetch_top_k_profiles function")
