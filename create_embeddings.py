@@ -43,7 +43,7 @@ def fetch_top_k_profiles(query: str, k: int = 5):
     print("The results are: ", results)
 
     # Filter by score threshold
-    threshold = 0.2
+    threshold = 0.3
     filtered_results = [
         match for match in results['matches']
         if match['score'] >= threshold
