@@ -31,15 +31,15 @@ async def get_top_k_profiles(query: str):
     results = fetch_top_k_profiles(query, 3)
     return {"results": results}
 
-# @app.get("/fetch_top_k_profiles")
-# async def perform_fetch_top_k_profiles(request: Request):
-#     print("Starting perform_fetch_top_k_profiles function")
-#     data = await request.json()
-#     query = data["query"]
-#     print("The query is: ", query)
-#     results = fetch_top_k_profiles(query, 5)
-#     print("The results are: ", results)
-#     return {"results": results}
+@app.post("/fetch_top_k_profiles")
+async def perform_fetch_top_k_profiles(request: Request):
+    print("Starting perform_fetch_top_k_profiles function")
+    data = await request.json()
+    query = data["query"]
+    print("The query is: ", query)
+    results = fetch_top_k_profiles(query, 5)
+    print("The results are: ", results)
+    return {"results": results}
 
 @app.post("/index_profile", response_model=ProfileResponse)
 async def perform_index_profile(request: Request):
@@ -57,20 +57,20 @@ async def perform_index_profile(request: Request):
         return {"message": f"Error indexing profile: {str(e)}", "success": False}
 
 
-if __name__ == "__main__":
-    import uvicorn
-    try:
-        # Railway provides PORT environment variable
-        port = int(os.environ.get("PORT", 8000))
-        uvicorn.run(app, host="0.0.0.0", port=port)
-    except Exception as e:
-        raise
-else:
-    # For Railway deployment, also expose at module level
-    import uvicorn
-    try:
-        port = int(os.environ.get("PORT", 8000))
-        uvicorn.run(app, host="0.0.0.0", port=port)
-    except Exception as e:
-        print(f"Failed to start server: {str(e)}")
-        raise
+# if __name__ == "__main__":
+#     import uvicorn
+#     try:
+#         # Railway provides PORT environment variable
+#         port = int(os.environ.get("PORT", 8000))
+#         uvicorn.run(app, host="0.0.0.0", port=port)
+#     except Exception as e:
+#         raise
+# else:
+#     # For Railway deployment, also expose at module level
+#     import uvicorn
+#     try:
+#         port = int(os.environ.get("PORT", 8000))
+#         uvicorn.run(app, host="0.0.0.0", port=port)
+#     except Exception as e:
+#         print(f"Failed to start server: {str(e)}")
+#         raise
